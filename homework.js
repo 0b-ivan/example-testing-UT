@@ -20,12 +20,28 @@ function sumSmallerThanFirst(array){
     let first = array[0]
     let sum = 0
 
-    for (let i = 1 ; i <= array.length;i++){
+    for (let i = 1 ; i < array.length;i++){
         sum += array[i]
     }
 
     return sum < first
 }
+
+function testSum(array, erwartung){
+    //invalidPath
+    if(!proofContbyNum(array)){
+        console.log('invalid input. not a number')
+        return false
+    }
+    if(sumSmallerThanFirst(array)!== erwartung) {
+        printingTestLog("sumSmallerThanFirst",array,erwartung)
+        console.log(
+            " ",sumSmallerThanFirst(array),'\n',
+            "Test FAILED",
+            '\n',"========================",'\n'
+        )
+        return false
+    }
 
 function printingTestLog(funkName,arg,erw){
     console.log(
@@ -34,12 +50,20 @@ function printingTestLog(funkName,arg,erw){
         'Erwartet war: ','\n',
         erw, '\n',
         'Resultat:'
-
-
     )
 }
-
+function proofContbyNum(array){
+    if(typeof array === 'string'){
+        return false
+    }
+    return array.every(item => typeof item === 'number')
+}
 function testMultiplayArr(array, erwartung){
+    //invalidPath
+    if(!proofContbyNum(array)){
+        console.log('invalid input. not a number')
+        return false
+    }
     //BadPath
     if(multiplyArray(array)!== erwartung){
         printingTestLog('multiplyArray',array,erwartung)
@@ -57,14 +81,15 @@ function testMultiplayArr(array, erwartung){
         '\n',"========================",'\n'
     )
     return true
-
 }
 
 
 
 function test(){
-    testMultiplayArr([28, 17, 2, 5],4760)
-    testMultiplayArr([28, 17, 2, 5],100)
+    //testMultiplayArr([28, 17, 2, 5],4760)
+    //testMultiplayArr([28, 17, 2, 5],100)
+    //testMultiplayArr([0,0,0,0],100)
+
 
 }
 
